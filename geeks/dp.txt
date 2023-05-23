@@ -1,0 +1,21 @@
+DP Sturcture
+
+    1) Overlapping Subproblem
+    2) Optimal Substructure Property
+
+
+DP Example
+    Maximizing or Minimizing value or Counting Problem 
+
+
+DP Techniques
+    1) Top Down ( Memoization )
+        -> When every subproblem need not be solved at all
+    2) Bottom Up ( Tabulation )
+        -> When every subproblem must be solved at least once
+
+
+DP States
+    ->  Decide state exp and Formulate transition relationships
+
+
