@@ -5,8 +5,8 @@ class Solution(object):
         :rtype: int
         """
         n = len(isConnected)
+        
         graph = {idx:[] for idx in range(n)}
-
         for j in range(n-1):
             for i, v in enumerate(isConnected[j][j+1:]):
                 if v == 1:
