@@ -1,0 +1,7 @@
+single Source (src -> all)
+
+Single Destination (all -> dst)
+
+Single Pair ( src -> dst)
+
+All pair (all -> all)
