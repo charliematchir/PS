@@ -1,3 +1,5 @@
+from collections import defaultdict
+import heapq
 class Solution(object):
     def maxProbability(self, n, edges, succProb, start, end):
         """
@@ -8,7 +10,7 @@ class Solution(object):
         :type end: int
         :rtype: float
         """
-        graph = collections.defaultdict(dict)
+        graph = defaultdict(dict)
 
         for (src, dst), prob in zip(edges, succProb):
             graph[src][dst] = prob

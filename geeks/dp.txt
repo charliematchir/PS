@@ -14,8 +14,12 @@ DP Techniques
     2) Bottom Up ( Tabulation )
         -> When every subproblem must be solved at least once
 
-
+1.
 DP States
-    ->  Decide state exp and Formulate transition relationships
+    ->  Decide state exp
+2.
+DP realtion
+    -> Formulate transition relationships of exp
+
 
 

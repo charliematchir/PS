@@ -13,8 +13,8 @@ def main():
 
         if visible[u] or visible[v]:
             continue
-        # if (v != N-1 and visible[v] == 1) or (u != N-1 and visible[u] == 1):
-        #     continue
+        if (v != N-1 and visible[v] == 1) or (u != N-1 and visible[u] == 1):
+            continue
 
         if u not in graph:
             graph[u] = {}

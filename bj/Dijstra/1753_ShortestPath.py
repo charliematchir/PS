@@ -1,5 +1,6 @@
 import sys
 import heapq
+from collections import defaultdict
 
 def dijkstra_brute(G, V, src):
     dist = [float('inf')] * (V + 1)
@@ -43,10 +44,8 @@ def dijkstra_pq(G,V,src):
 
     while pq:
         curr_dist, curr_node = heapq.heappop(pq)
-        if curr_node not in G:
-            continue
 
-        if curr_dist > dist[curr_node]:
+        if curr_node not in G or curr_dist > dist[curr_node]:
             continue
 
         for node, weight in G[curr_node].items():
@@ -67,16 +66,19 @@ def main():
     #     u, v, w = map(int, sys.stdin.readline().split())
     #     W[u][v] = w
 
-    graph = {}
+    graph = defaultdict(dict)
     # graph = {node: {} for node in range(1,V+1)}
     for _ in range(E):
         u, v, w = map(int, sys.stdin.readline().split())
-        if u not in graph:
-            graph[u] = {}
-        graph[u][v] = w
+        if v not in graph[u]:
+            graph[u][v] = w
+        else:
+            graph[u][v] = min(graph[u][v], w)
+
+
     print(graph)
     dijkstra_pq(graph,V,K)
-    # dijkstra_graph(graph, V, K)
+
 
 
 if __name__ == '__main__':

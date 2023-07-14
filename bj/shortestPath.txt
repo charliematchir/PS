@@ -1,7 +1,32 @@
 single Source (src -> all)
 
-Single Destination (all -> dst)
+Single Destination (all -> dst) (Dijkstra of rev_graph)
 
 Single Pair ( src -> dst)
 
 All pair (all -> all)
+
+
+
+all 3 algorithm used for finding shortest path
+
+Floyd Warshall ( all -> all )
+    Edge weight Neg to Pos
+    Won't work with neg cycle Graph ( dist[i][i] <0 -> Negative Cycle )
+    O(V^3)
+    Used when small V & E, but dense Graph
+
+Dijkstra (src -> all)
+    Edge weight only Pos
+    O((V+E)LogV)
+
+
+Bellman Ford (src -> all)
+    Edge weight Neg to Pos
+    Can detect Neg cycle in graph
+    O(VE)
+
+
+
+A* Algorithm (src -> dst)
+    using Heuristic value
