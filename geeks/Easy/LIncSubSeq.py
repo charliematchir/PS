@@ -1,11 +1,17 @@
+
+'''
+LIS 에서 dp[i] 는 i 에서 끝나는 부분 수열의 최대 길이
+'''
+
 def LIS(li):
     n = len(li)
-    dp = [1] *n
-    for i in range(1,n):
+    dp = [1] * n
+    for i in range(1, n):
         for j in range(i):
             if li[i] > li[j] and dp[j]+1 > dp[i]:
                 dp[i] = dp[j] + 1
-    
+            # if li[i] > li[j]:
+            #     dp[i] = max(dp[i], dp[j] + 1)
     answer = 0
     for v in dp:
         if v > answer:
@@ -14,9 +20,6 @@ def LIS(li):
 
 # O(N^2)
 # LIS is Same as LCS between sorted li and li
-
-
-
 def LCS_like(li):
     n = len(li)
     sorted_li = sorted(li)
@@ -32,16 +35,60 @@ def LCS_like(li):
     print(dp[-1][-1])
 
 
+'''
+For each number in nums, we perform the following steps:
+
+If the number is greater than the last element of the last bucket
+(i.e., the largest element in the current subsequence),
+we append the number to the end of the list.
+This indicates that we have found a longer subsequence.
+Otherwise, we perform a binary search on the list of buckets
+to find the smallest element that is greater than or equal to the current number.
+This step helps us maintain the property of increasing elements in the buckets.
+Once we find the position to update, we replace that element with the current number.
+This keeps the buckets sorted and ensures that we have the potential for a longer subsequence in the future.
+'''
+
+def binary_search(li, left, right, target):
+    while (left < right):
+        mid = (left+ right)//2
+        if li[mid] < target:
+            left = mid + 1
+        else:
+            right = mid
+    return right
+
+#O(N * Log N)
+def bs_LIS(li):
+    n = len(li)
+    size = 1
+    dp = [li[0]] + [0]*(n-1)
+    for v in li[1:]:
+        if v > dp[-1]:
+            dp.append(v)
+            size += 1
+        else:
+            left, right = 0, size
+            while left < right:
+                mid = (left + right) // 2
+                if dp[mid] < v:
+                    left = mid + 1
+                else:
+                    right = mid
+            dp[right] = v
+
+    print(size)
+    print(dp)
+
 #O(N*logN) // Patience Sorting
-# But not exat oreder
+# But not exact order
 def Fast_LCS_like(li):
     n = len(li)
-    dp = [0]* n
+    dp = [0] * n
     
     size = 0
     for v in li:
         left, right = 0, size
-
         while left < right:
             mid = (left+right)//2
             if li[mid] < v:
@@ -49,7 +96,7 @@ def Fast_LCS_like(li):
             else:
                 right = mid
 
-        tails[left] = num
+        # tails[left] = num
         size = max(size, left + 1)
 
     print(size)
@@ -146,16 +193,18 @@ def count_lis_combinations(nums):
 
 
 def main():
-    arr = [10, 22, 9, 33, 21, 50, 41, 60]
-    li = [50, 3, 10, 7, 40, 80]
-    
-    #LIS(arr)
-    seq = [10,9,2,5,3,7,101,18]
-    n, l = lis_with_numbers(seq)
-    v = count_lis_combinations(seq)
-    #print(n)
-    print(l)
-    print(v)
+    # arr = [10, 22, 9, 33, 21, 50, 41, 60]
+    # li = [50, 3, 10, 7, 40, 80]
+    #
+    # #LIS(arr)
+    # seq = [10,9,2,5,3,7,101,18]
+    # n, l = lis_with_numbers(seq)
+    # v = count_lis_combinations(seq)
+    # #print(n)
+    # print(l)
+    # print(v)
+    li = [10, 22, 9, 33, 21, 50, 41, 60]
+    bs_LIS(li)
 
 if __name__== '__main__':
 	main()

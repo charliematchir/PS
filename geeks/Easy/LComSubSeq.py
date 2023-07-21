@@ -11,10 +11,6 @@ def LCS(str1, str2):
     #print(dp)
     print(dp[m][n])
 
-
-
-
-
 def main():
     s1 = "AGGTAB"
     s2 = "GXTXAYB"
