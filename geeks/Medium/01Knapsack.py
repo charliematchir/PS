@@ -58,7 +58,6 @@ def knapSack(W, wt, val, n):
 
 def knapsack_print(profit, weight, cap, n):
     dp= [[0]*(cap+1) for _ in range(n+1)]
-
     for i in range(n+1):
         for w in range(cap+1):
             if i == 0 or w == 0:
@@ -72,8 +71,10 @@ def knapsack_print(profit, weight, cap, n):
     j = cap
     answer = []
     for i in range(n, 0, -1):
+        if dp[i][j] <= 0:
+            break
         if dp[i][j] != dp[i-1][j]:
-            answer.append(weight[i-1])
+            answer.append(i)
             j -= weight[i-1]
 
     print(dp[-1][-1])
@@ -82,11 +83,6 @@ def knapsack_print(profit, weight, cap, n):
 def unbounded_knapSack(W, wt, val, n):
     dp = [0] * (W + 1)
 
-    for i in range(n):
-        for w in range(1, W+1):
-            if w >= wt[i]:
-                dp[w] = max(dp[w - wt[i]] + val[i], dp[w])
-    print(dp)
 
     dp = [0] * (W + 1)
     for w in range(1, W + 1):
@@ -95,6 +91,7 @@ def unbounded_knapSack(W, wt, val, n):
                 dp[w] = max(dp[w - wt[i]] + val[i], dp[w])
     print(dp)
 
+    # dnl
 
 
 if __name__ == '__main__':

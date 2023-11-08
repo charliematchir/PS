@@ -4,6 +4,8 @@ Time Complexity: O(n*2^n)
 Auxiliary Space: O(n*2^n)
 '''
 
+# Input -> n , #1 Cap id(2, 3,100), #2 Cap id(3, 4, 20) ...
+
 from collections import defaultdict
 
 class AssignCap:
@@ -13,22 +15,30 @@ class AssignCap:
         self.caps = defaultdict(list)
     
     def countWaysUtil(self, dp, mask, cap_no):
+
+        # all person wearing Cap, done
         if mask == self.allmask:
             return 1
 
+        # No one wearing cap and no more caps left
         if cap_no > self.total_caps:
             return 0
-        
+
         if dp[mask][cap_no] != -1:
             return dp[mask][cap_no]
 
+        # Num ways without choosing cap_no
         ways = self.countWaysUtil(dp, mask, cap_no +1)
+
 
         if cap_no in self.caps:
             for person in self.caps[cap_no]:
+                # when 'person' is already wearing cap.
                 if mask & (1<<person):
                     continue
-                ways += self. countWaysUtil(dp, mask | (1<<person), cap_no +1)
+
+                # Num ways preson wearing cap cap_no
+                ways += self.countWaysUtil(dp, mask | (1<<person), cap_no +1)
                 ways = ways %(1000000007)
         
         dp[mask][cap_no] = ways
@@ -42,12 +52,11 @@ class AssignCap:
                 self.caps[i].append(person)
 
         self.allmask = (1 << N) -1
-        dp = [[-1 for j in range(self.total_caps + 1)] for i in range(2**N)]
+        dp = [[-1] * (self.total_caps+1) for _ in range(2**N)]
         print(self.countWaysUtil(dp, 0, 1))
 
 def main():
     Num_people = input()
-
     AssignCap().countWays(Num_people)
 
 if __name__ == '__main__':

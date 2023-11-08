@@ -6,6 +6,13 @@ def coinChange(target, coins):
 		for i in range(coin, target+1):
 			dp[i] += dp[i-coin]
 	print(dp[-1])
+
+	#or
+
+	for j in range(1, target + 1):
+		for coin in coins:
+			if j >= coin:
+				dp[j] += dp[j - coin]
 	
 	'''
 	2 3 5 6
@@ -32,10 +39,6 @@ def coinChange(target, coins):
 	1과 2로	dp[4]의 (1 1 2) 랑(1 2 1) (2 1 1) (2 2) (1 1 1 1) 을 다 세는것 
 	
     '''
-    for j in range(1, target+1):
-		for coin in coins:
-			if j >= coin:
-				dp[j] += dp[j-coin]
 
     
 def main():

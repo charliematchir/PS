@@ -18,8 +18,14 @@ DP Techniques
 DP States
     ->  Decide state exp
 2.
-DP realtion
+DP realtion (state Transition)
     -> Formulate transition relationships of exp
 
 
+DP 문제는 아래 5가지 중 하나이다.
 
+0/1 Knapsack
+Unbounded Knapsack
+Shortest Path (eg: Unique Paths I/II)
+Fibonacci Sequence (eg: House Thief, Jump Game)
+Longest Common Substring/Subsequeunce

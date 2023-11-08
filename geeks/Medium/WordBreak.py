@@ -1,26 +1,29 @@
 def wb(s, wordDict):
+
+    # n = len(s)
+    # dp = [False] * (n + 1)
+    # dp[0] = True
+    # for i in range(n):
+    #     if dp[i] == False:
+    #         continue
+    #     for w in wordDict:
+    #         if len(w) <= n - i:
+    #             if s[i: i + len(w)] == w:
+    #                 dp[i + len(w)] = True
+    # return dp[n]
+
+
+    # Break Point 가 i에서 시작 하는경우는 early break 가 가능
     n = len(s)
     dp = [False] * (n + 1)
-    dp[0] = True
-
-    for i in range(n):
-        if dp[i] == False:
-            continue
-
+    dp[n] = True
+    for i in range(n-1, -1, -1):
         for w in wordDict:
-            if len(w) <= n - i:
-                if s[i: i + len(w)] == w:
-                    dp[i + len(w)] = True
-    return dp[n]
-
-    for i in range(n):
-        if dp[n]:
-            return dp[n]
-        if dp[i]:
-            for j in range(i, n):
-                if s[i:j+1] in wordDict:
-                    dp[j+1] = True
-    return dp[n]
+            if i + len(w) <= n and s[i:i+len(w)] == w:
+                dp[i] = dp[i+len(w)]
+            if dp[i]:
+                break
+    return dp[0]
 
 
 def main():

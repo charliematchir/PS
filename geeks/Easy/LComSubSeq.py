@@ -8,7 +8,6 @@ def LCS(str1, str2):
                 dp[j][i] = dp[j-1][i-1] + 1
             else:
                 dp[j][i] = max(dp[j-1][i], dp[j][i-1])
-    #print(dp)
     print(dp[m][n])
 
 def main():
